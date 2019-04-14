@@ -18,7 +18,7 @@
   </div>
   <div class="form-group">
     <label for="">File:</label>
-    <input type="file" id="" placeholder="" name="file">
+    <input type="file" id="" placeholder="" name="photo_id">
   </div>
   <div class="form-group">
     <label for="">Status:</label>
