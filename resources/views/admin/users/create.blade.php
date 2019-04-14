@@ -3,7 +3,7 @@
 @section('content')
 <h1>Create Users</h1>
 
-<form method="POST" action="{{action('AdminUsersController@store')}}">
+<form method="POST" action="{{action('AdminUsersController@store')}}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="">Name:</label>
     <input type="text" class="form-control" id="" placeholder="" name="name">
@@ -17,8 +17,12 @@
     <input type="password" class="form-control" id="" placeholder="" name="password">
   </div>
   <div class="form-group">
+    <label for="">File:</label>
+    <input type="file" id="" placeholder="" name="file">
+  </div>
+  <div class="form-group">
     <label for="">Status:</label>
-    <select class="form-control" name="status">
+    <select class="form-control" name="is_active">
       <option value="0">Not active</option>
       <option value="1">Active</option>
     </select>
@@ -40,4 +44,16 @@
     </button>
   </div>
 </form>
+
+@if(count($errors) > 0)
+<div class="alert alert-danger">
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
+
+
 @stop
