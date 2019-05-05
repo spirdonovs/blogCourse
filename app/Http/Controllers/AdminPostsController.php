@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Requests\PostCreateRequest;
 use App\User;
 use App\Photo;
+use App\Category;
 use App\Post;
 
 class AdminPostsController extends Controller
@@ -32,7 +33,8 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**

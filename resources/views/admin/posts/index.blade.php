@@ -7,6 +7,7 @@
   <thead>
     <th width="10%"></th>
     <th>Title</th>
+    <th>Category</th>
     <th>User</th>
     <th>Created</th>
     <th>Updated</th>
@@ -20,6 +21,7 @@
         @endif
       </td>
       <td>{{$post->title}}</td>
+      <td>{{$post->category ? $post->category->name : "No category"}}</td>
       <td>{{$post->user->name}}</td>
       <td>{{$post->created_at->diffForhumans()}}</td>
       <td>{{$post->updated_at->diffForhumans()}}</td>
