@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades;
+use Session;
 use App\User;
 use App\Photo;
 use App\Role;
+
 
 use Illuminate\Http\Request;
 
@@ -71,7 +75,8 @@ class AdminUsersController extends Controller
      */
     public function show($id)
     {
-         return view('admin.users.show');
+      $users = User::all();
+         //return view('admin.users.index', compact('users'));
         //return redirect('/admin/users');
     }
 
@@ -99,7 +104,7 @@ class AdminUsersController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        
+
         if (trim($request->password) == '') {
           $input = $request->except('password');
         }else{
@@ -130,6 +135,11 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $user = User::findOrFail($id);
+      unlink(public_path() . $user->photo->file);
+      $user->delete();
+      Session::flash('deleted_user', 'The user has been deleted');
+
+      return redirect('/admin/users');
     }
 }

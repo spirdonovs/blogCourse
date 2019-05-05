@@ -3,7 +3,11 @@
 @section('content')
 <h1>Edit Users</h1>
 <div class="col-sm-3">
-  <img src="{{$user->photo->file}}" alt="" class="img-responsive img-rounded">
+  <?php if ($user->photo != ''): ?>
+    <img src="{{$user->photo->file}}" alt="" class="img-responsive img-rounded">
+  <?php else: ?>
+<img src="" alt="" class="img-responsive img-rounded">
+<?php endif; ?>
 </div>
 <div class="col-sm-9">
   <form method="POST" action="{{action('AdminUsersController@update', $user->id)}}" enctype="multipart/form-data">
@@ -47,6 +51,14 @@
         Edit User
       </button>
     </div>
+  </form>
+
+  <form action="{{action('AdminUsersController@destroy', $user->id)}}" method="post">
+    {{ method_field('DELETE') }}
+    {{ csrf_field() }}
+    <button type="submit" name="delete" class="btn btn-danger">
+      Delete User
+    </button>
   </form>
 </div>
 
